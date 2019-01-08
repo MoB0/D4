@@ -8,6 +8,7 @@ public class Camera : MonoBehaviour
     private float x;
     private float y;
     private Vector3 rotateValue;
+    private float speed;
 
     public Transform player;
 
@@ -21,14 +22,8 @@ public class Camera : MonoBehaviour
     void LateUpdate()
     {
         if (Input.GetButton("Fire3")){
-
-            transform.RotateAround(Vector3.zero, Vector3.up, 20 * Time.deltaTime);
+            transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("Mouse X")*70 * Time.deltaTime);
             transform.LookAt(player);
-
-            //y = Input.GetAxis("Mouse X");
-            //x = Input.GetAxis("Mouse Y");
-            //rotateValue = new Vector3(x, y * -1, 0);
-            //transform.eulerAngles = transform.eulerAngles - rotateValue;
         }
     }
 }
