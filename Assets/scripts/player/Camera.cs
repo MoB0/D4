@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Camera : MonoBehaviour
 {
-
-    private float x;
-    private float y;
-    private Vector3 rotateValue;
-    private float speed;
-
     public Transform player;
 
     // Start is called before the first frame update
@@ -21,9 +15,9 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Input.GetButton("Fire3")){
-            transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("Mouse X")*70 * Time.deltaTime);
-            transform.LookAt(player);
-        }
+        //if (Input.GetButton("Fire3")){
+        //    transform.RotateAround(player.transform.position, Vector3.up, Input.GetAxis("Mouse X")*70 * Time.deltaTime);
+        //    transform.LookAt(player);
+        //}
     }
 }
