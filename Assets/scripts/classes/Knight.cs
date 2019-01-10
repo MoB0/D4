@@ -10,16 +10,19 @@ public class Knight : MonoBehaviour
     public int Intelligence;
     public int AttackSpeed;
     public int Stamina;
+    public float MeleeRange;
+    public float RangedRange;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        WalkSpeed = 7;
+        WalkSpeed = 6;
         Str = 9;
         Dex = 3;
         Intelligence = 3;
         AttackSpeed = 6;
         Stamina = 6;
+        MeleeRange=3;
+        RangedRange=10;
 }
 
     // Update is called once per frame

@@ -4,35 +4,52 @@ using UnityEngine;
 
 public class PlayerAttributes : MonoBehaviour
 {
+    public char PlayerClass;
+
     public int WalkSpeed;
     public int Str;
     public int Dex;
     public int Intelligence;
-    public int AttackSpeed;
+    public int AttackRate;
     public int Stamina;
+
+    public float MeleeRange;
+    public float RangedRange;
+
+    GameObject classManager;
+
+    private void Awake()
+    {
+        classManager = GameObject.Find("classManager");
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        if (GetComponent<PlayerClass>().Class == 'K')
+        if (PlayerClass == 'K')
         {
-            //WalkSpeed = GetComponent<Knight>().WalkSpeed;
-            WalkSpeed = 7;
-            Str = GetComponent<Knight>().Str;
-            Dex = GetComponent<Knight>().Dex;
-            Intelligence = GetComponent<Knight>().Intelligence;
-            AttackSpeed = GetComponent<Knight>().AttackSpeed;
-            Stamina = GetComponent<Knight>().Stamina;
-        }
-        if (GetComponent<PlayerClass>().Class == 'M')
+            WalkSpeed = classManager.GetComponent<Knight>().WalkSpeed;
+            Str = classManager.GetComponent<Knight>().Str;
+            Dex = classManager.GetComponent<Knight>().Dex;
+            Intelligence = classManager.GetComponent<Knight>().Intelligence;
+            AttackRate = classManager.GetComponent<Knight>().AttackSpeed;
+            Stamina = classManager.GetComponent<Knight>().Stamina;
+            MeleeRange = classManager.GetComponent<Knight>().MeleeRange;
+            RangedRange= classManager.GetComponent<Knight>().RangedRange;
+}
+        if (PlayerClass == 'M')
         {
-            WalkSpeed = GetComponent<Mage>().WalkSpeed;
-            Str = GetComponent<Mage>().Str;
-            Dex = GetComponent<Mage>().Dex;
-            Intelligence = GetComponent<Mage>().Intelligence;
-            AttackSpeed = GetComponent<Mage>().AttackSpeed;
-            Stamina = GetComponent<Mage>().Stamina;
+            WalkSpeed = classManager.GetComponent<Mage>().WalkSpeed;
+            Str = classManager.GetComponent<Mage>().Str;
+            Dex = classManager.GetComponent<Mage>().Dex;
+            Intelligence = classManager.GetComponent<Mage>().Intelligence;
+            AttackRate = classManager.GetComponent<Mage>().AttackSpeed;
+            Stamina = classManager.GetComponent<Mage>().Stamina;
+            MeleeRange = classManager.GetComponent<Mage>().MeleeRange;
+            RangedRange = classManager.GetComponent<Mage>().RangedRange;
         }
+        
     }
 
     // Update is called once per frame

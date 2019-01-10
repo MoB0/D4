@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Mage : MonoBehaviour
 {
-    public int WalkSpeed = 9;
-    public int Str = 3;
-    public int Dex = 3;
-    public int Intelligence = 9;
-    public int AttackSpeed = 6;
-    public int Stamina = 6;
+    public int WalkSpeed;
+    public int Str;
+    public int Dex;
+    public int Intelligence;
+    public int AttackSpeed;
+    public int Stamina;
+    public float MeleeRange;
+    public float RangedRange;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        WalkSpeed = 9;
+        Str = 3;
+        Dex = 3;
+        Intelligence = 9;
+        AttackSpeed = 6;
+        Stamina = 6;
     }
 
     // Update is called once per frame
