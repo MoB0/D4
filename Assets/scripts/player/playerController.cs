@@ -49,7 +49,7 @@ public class playerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-        {
+        {          
             if(Physics.Raycast(ray, out hit, 100))
             {
                 if (hit.collider.CompareTag("Enemy"))
@@ -62,7 +62,6 @@ public class playerController : MonoBehaviour
                     walking = true;
                     enemyClicked = false;
                     navMeshAgent.destination = hit.point;
-                    navMeshAgent.Resume();
                 }
             }            
         }
@@ -74,7 +73,6 @@ public class playerController : MonoBehaviour
         if (navMeshAgent.remainingDistance <= MeleeRange)//navMeshAgent.stoppingDistance)
         {
             walking = false;
-            navMeshAgent.Stop();
         }
         else
         {
@@ -92,7 +90,6 @@ public class playerController : MonoBehaviour
         navMeshAgent.destination = targetedEnemy.position;
         if(navMeshAgent.remainingDistance >= MeleeRange)
         {
-            navMeshAgent.Resume();
             walking = true;
         }
         if (navMeshAgent.remainingDistance <= MeleeRange)
@@ -104,10 +101,7 @@ public class playerController : MonoBehaviour
                 nextFire = Time.time + AttackRate;
                 GetComponent<PlayerCombat>().Attack(dirToAttack);
             }
-            navMeshAgent.Stop();
             walking = false;
         }
-
     }
-
 }

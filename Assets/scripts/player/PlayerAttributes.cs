@@ -21,6 +21,8 @@ public class PlayerAttributes : MonoBehaviour
     private void Awake()
     {
         classManager = GameObject.Find("classManager");
+
+        
     }
 
 
@@ -36,8 +38,8 @@ public class PlayerAttributes : MonoBehaviour
             AttackRate = classManager.GetComponent<Knight>().AttackSpeed;
             Stamina = classManager.GetComponent<Knight>().Stamina;
             MeleeRange = classManager.GetComponent<Knight>().MeleeRange;
-            RangedRange= classManager.GetComponent<Knight>().RangedRange;
-}
+            RangedRange = classManager.GetComponent<Knight>().RangedRange;
+        }
         if (PlayerClass == 'M')
         {
             WalkSpeed = classManager.GetComponent<Mage>().WalkSpeed;
@@ -49,7 +51,7 @@ public class PlayerAttributes : MonoBehaviour
             MeleeRange = classManager.GetComponent<Mage>().MeleeRange;
             RangedRange = classManager.GetComponent<Mage>().RangedRange;
         }
-        
+
     }
 
     // Update is called once per frame
