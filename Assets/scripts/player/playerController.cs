@@ -9,6 +9,7 @@ using UnityEngine.AI;
 public class playerController : MonoBehaviour
 {
     private Vector3 targetPosition;
+    private Vector3 modifiedTarget;
     private bool isMoving;
 
     private Animator anim;
@@ -48,7 +49,7 @@ public class playerController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButton(0))
         {          
             if(Physics.Raycast(ray, out hit, 100))
             {
@@ -61,7 +62,10 @@ public class playerController : MonoBehaviour
                 {
                     walking = true;
                     enemyClicked = false;
-                    navMeshAgent.destination = hit.point;
+                    modifiedTarget = hit.point;                     //save hit.point to own variable
+                    modifiedTarget.y = transform.position.y;        //modify y axis so that player wont look up or down
+                    transform.LookAt(modifiedTarget);               //look at modified target
+                    navMeshAgent.destination = hit.point;           //set destination
                 }
             }            
         }
@@ -82,26 +86,31 @@ public class playerController : MonoBehaviour
     }
 
     void MoveAndAttack()
-    {
+    {       
         if (targetedEnemy == null)
         {
             return;
         }
         navMeshAgent.destination = targetedEnemy.position;
-        if(navMeshAgent.remainingDistance >= MeleeRange)
+        Debug.Log(navMeshAgent.remainingDistance);
+        if (navMeshAgent.remainingDistance > MeleeRange)
         {
             walking = true;
         }
         if (navMeshAgent.remainingDistance <= MeleeRange)
         {
-            transform.LookAt(targetedEnemy);
+            navMeshAgent.velocity = Vector3.zero;
+            walking = false;
+            modifiedTarget = targetedEnemy.position;        //save hit.point to own variable
+            modifiedTarget.y = transform.position.y;        //modify y axis so that player wont look up or down
+            transform.LookAt(modifiedTarget);               //look at modified target
+
             Vector3 dirToAttack = targetedEnemy.transform.position - transform.position;
             if(Time.time > nextFire)
             {
                 nextFire = Time.time + AttackRate;
                 GetComponent<PlayerCombat>().Attack(dirToAttack);
-            }
-            walking = false;
+            }           
         }
     }
 }
