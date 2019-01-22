@@ -29,12 +29,11 @@ public class enemyBaseScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         patrolTimer = Random.Range(1f, 2.5f);                   //time for patrol movement
         stopTimer = Random.Range(0f, 2.5f);                     //time for patrol movement stop between directions
         patrolTarget.position = new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1));
         lastPatrolChange = Time.time;
-        Debug.Log(patrolTarget.position);
     }
 
     // Update is called once per frame
@@ -59,7 +58,6 @@ public class enemyBaseScript : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.position) < detectRange)            //check if player is in detecting range
         {
-            Debug.Log("chasing");
             transform.LookAt(player.position);                                              //turn enemy towards player
             controller.SimpleMove(transform.forward * speed);                               //move enemy towards player
             //anim.Play("run");
@@ -78,7 +76,7 @@ public class enemyBaseScript : MonoBehaviour
     {
         if (Time.time < lastPatrolChange + patrolTimer)
         {
-            //Debug.Log(transform.forward);
+
                                                                                             //turn enemy towards patrolDirection
             controller.SimpleMove(transform.forward * speed);                               //move enemy towards patrolDirection
         }
@@ -89,9 +87,6 @@ public class enemyBaseScript : MonoBehaviour
             modifiedTarget.y = transform.position.y;
             patrolTarget.position = modifiedTarget;
             lastPatrolChange = Time.time;
-            Debug.Log("new values");
-            Debug.Log(patrolTimer);
-            Debug.Log(patrolTarget.position);
             
             transform.LookAt(patrolTarget);
         }
