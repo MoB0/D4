@@ -104,7 +104,8 @@ GameObject:
   - component: {fileID: 5670010479255539355}
   - component: {fileID: 5670010479255539354}
   - component: {fileID: 5670010479255539358}
-  - component: {fileID: 5670010479255539359}
+  - component: {fileID: 32433952}
+  - component: {fileID: 6274755117471447846}
   - component: {fileID: 5670010479255539356}
   - component: {fileID: 5670010479255539357}
   m_Layer: 9
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   TargetPoint: {fileID: 0}
---- !u!114 &5670010479255539359
+--- !u!114 &32433952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,19 +212,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 5670010479255539333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e94b21dd4df2a5489e4b175d803f6a5, type: 3}
+  m_Script: {fileID: 11500000, guid: ab1ab39b81ec3b6409b3154b3d5fdc33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
   meleeRange: 2
   detectRange: 10
   patrolRange: 30
-  patrolTarget: {fileID: 5670010479494337910}
   patrol: 1
+  patrolBasePoint: {fileID: 0}
+  patrolTarget: {fileID: 5670010479494337910}
   controller: {fileID: 5670010479255539356}
   player: {fileID: 0}
   run: {fileID: 0}
   idle: {fileID: 0}
+--- !u!114 &6274755117471447846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670010479255539333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc28ccfcca04914fbd2a4f724765481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeDamage: 5
+  attackSpeed: 2
 --- !u!143 &5670010479255539356
 CharacterController:
   m_ObjectHideFlags: 0

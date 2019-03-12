@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyBaseScript : MonoBehaviour
+public class enemyMovement : MonoBehaviour
 {
     public float speed;
     public float meleeRange;
     public float detectRange;
     public float patrolRange;
 
+
+    [SerializeField]
+    bool patrol;
+    [SerializeField]
+    Transform patrolBasePoint;
+
     float patrolTimer;
     float lastPatrolChange;
     public Transform patrolTarget;
     Vector3 modifiedTarget;
     float stopTimer;
-
-
-    [SerializeField]
-    bool patrol;
 
     public CharacterController controller;
     public Transform player;
@@ -64,13 +66,13 @@ public class enemyBaseScript : MonoBehaviour
             controller.SimpleMove(transform.forward * speed);                               //move enemy towards player
             //anim.Play("run");
         }
-        if (patrol == true)
+        else if (patrol == true)
         {
             if (Vector3.Distance(transform.position, player.position) < patrolRange && Vector3.Distance(transform.position, player.position) > detectRange)            //check if player is in patrolling range but not in detecting range
             {
                 Patrol();
             }
-            
+
         }
     }
 
@@ -79,10 +81,10 @@ public class enemyBaseScript : MonoBehaviour
         if (Time.time < lastPatrolChange + patrolTimer)
         {
             //Debug.Log(transform.forward);
-                                                                                            //turn enemy towards patrolDirection
+            //turn enemy towards patrolDirection
             controller.SimpleMove(transform.forward * speed);                               //move enemy towards patrolDirection
         }
-        else if (Time.time > lastPatrolChange + patrolTimer+stopTimer)
+        else if (Time.time > lastPatrolChange + patrolTimer + stopTimer)
         {
             patrolTimer = Random.Range(1f, 2.5f);
             modifiedTarget = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
@@ -92,7 +94,7 @@ public class enemyBaseScript : MonoBehaviour
             Debug.Log("new values");
             Debug.Log(patrolTimer);
             Debug.Log(patrolTarget.position);
-            
+
             transform.LookAt(patrolTarget);
         }
     }
